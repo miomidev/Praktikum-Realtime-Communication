@@ -169,13 +169,15 @@ class _RestScreenState extends State<RestScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text(
-                        '1. Pengambilan Data (GET)',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 14),
+                      const Expanded(
+                        child: Text(
+                          '1. Pengambilan Data (GET)',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 14),
+                        ),
                       ),
+                      const SizedBox(width: 8),
                       FilledButton.icon(
                         onPressed: _isLoadingGet ? null : _fetchData,
                         icon: _isLoadingGet

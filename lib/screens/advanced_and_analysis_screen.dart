@@ -149,28 +149,28 @@ class AdvancedAndAnalysisScreen extends StatelessWidget {
                   const SizedBox(height: 12),
                   _buildRpcPatternTile(
                     'Unary RPC',
-                    '1 Request ➔ 1 Response',
+                    '1 Req ➔ 1 Res',
                     'Sama seperti REST API biasa, namun diproses dengan binary payload Protobuf yang jauh lebih cepat.',
                     Icons.arrow_forward,
                     Colors.blue,
                   ),
                   _buildRpcPatternTile(
                     'Server Streaming',
-                    '1 Request ➔ Aliran Banyak Response',
+                    '1 Req ➔ Stream Res',
                     'Client meminta pemantauan sensor, server terus mengalirkan data pembacaan secara live.',
                     Icons.trending_down,
                     Colors.green,
                   ),
                   _buildRpcPatternTile(
                     'Client Streaming',
-                    'Aliran Banyak Request ➔ 1 Response',
+                    'Stream Req ➔ 1 Res',
                     'Client mengunggah file besar atau log batch secara streaming sebelum server membalas dengan rangkuman.',
                     Icons.trending_up,
                     Colors.orange,
                   ),
                   _buildRpcPatternTile(
                     'Bidirectional Streaming',
-                    'Banyak Request 🔁 Banyak Response',
+                    'Stream Req 🔁 Stream Res',
                     'Kedua pihak saling streaming pesan independen secara bersamaan melalui satu koneksi HTTP/2 multiplexing.',
                     Icons.sync_alt,
                     Colors.purple,
@@ -587,27 +587,48 @@ class AdvancedAndAnalysisScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Icon(icon, size: 16, color: color),
-              const SizedBox(width: 6),
-              Text(title,
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 13,
-                      color: color)),
-              const Spacer(),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
+          SizedBox(
+            width: double.infinity,
+            child: Wrap(
+              alignment: WrapAlignment.spaceBetween,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              spacing: 8,
+              runSpacing: 4,
+              children: [
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(icon, size: 16, color: color),
+                    const SizedBox(width: 6),
+                    Text(
+                      title,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 13,
+                        color: color,
+                      ),
+                    ),
+                  ],
                 ),
-                child: Text(flow,
-                    style: const TextStyle(
-                        fontSize: 10.5, fontWeight: FontWeight.bold)),
-              ),
-            ],
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 7, vertical: 2.5),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: color.withValues(alpha: 0.2)),
+                  ),
+                  child: Text(
+                    flow,
+                    style: TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold,
+                      color: color,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
           const SizedBox(height: 6),
           Text(description,

@@ -108,36 +108,34 @@ class _PollingScreenState extends State<PollingScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                              color: Colors.orange.shade50,
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: const Icon(Icons.timer, color: Colors.orange),
-                          ),
-                          const SizedBox(width: 12),
-                          const Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Praktikum 2 — Polling',
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                'Periodic Request vs Long Polling',
-                                style:
-                                    TextStyle(fontSize: 12, color: Colors.grey),
-                              ),
-                            ],
-                          ),
-                        ],
+                      Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: Colors.orange.shade50,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: const Icon(Icons.timer, color: Colors.orange),
                       ),
+                      const SizedBox(width: 12),
+                      const Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Praktikum 2 — Polling',
+                              style: TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              'Periodic Request vs Long Polling',
+                              style:
+                                  TextStyle(fontSize: 11.5, color: Colors.grey),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: 8),
                       StatusBadge(
                         status: _isPolling
                             ? ConnectionStatus.connected
@@ -171,20 +169,22 @@ class _PollingScreenState extends State<PollingScreen> {
                       const Text('Interval: ',
                           style: TextStyle(fontWeight: FontWeight.w500)),
                       const SizedBox(width: 8),
-                      SegmentedButton<int>(
-                        segments: const [
-                          ButtonSegment(value: 1, label: Text('1 dtk')),
-                          ButtonSegment(value: 2, label: Text('2 dtk')),
-                          ButtonSegment(value: 5, label: Text('5 dtk')),
-                        ],
-                        selected: {_intervalSeconds},
-                        onSelectionChanged: _isPolling
-                            ? null
-                            : (newSelection) {
-                                setState(() {
-                                  _intervalSeconds = newSelection.first;
-                                });
-                              },
+                      Expanded(
+                        child: SegmentedButton<int>(
+                          segments: const [
+                            ButtonSegment(value: 1, label: Text('1 dtk')),
+                            ButtonSegment(value: 2, label: Text('2 dtk')),
+                            ButtonSegment(value: 5, label: Text('5 dtk')),
+                          ],
+                          selected: {_intervalSeconds},
+                          onSelectionChanged: _isPolling
+                              ? null
+                              : (newSelection) {
+                                  setState(() {
+                                    _intervalSeconds = newSelection.first;
+                                  });
+                                },
+                        ),
                       ),
                     ],
                   ),

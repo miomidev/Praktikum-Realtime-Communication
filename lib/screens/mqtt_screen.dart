@@ -281,37 +281,35 @@ class _MqttScreenState extends State<MqttScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                              color: Colors.purple.shade50,
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: const Icon(Icons.sensors,
-                                color: Colors.purple),
-                          ),
-                          const SizedBox(width: 12),
-                          const Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Praktikum 5 — MQTT IoT',
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                'Protokol Publish-Subscribe Ringan',
-                                style:
-                                    TextStyle(fontSize: 12, color: Colors.grey),
-                              ),
-                            ],
-                          ),
-                        ],
+                      Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: Colors.purple.shade50,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: const Icon(Icons.sensors,
+                            color: Colors.purple),
                       ),
+                      const SizedBox(width: 12),
+                      const Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Praktikum 5 — MQTT IoT',
+                              style: TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              'Publish-Subscribe Ringan',
+                              style:
+                                  TextStyle(fontSize: 11.5, color: Colors.grey),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: 8),
                       StatusBadge(status: _status),
                     ],
                   ),
@@ -404,27 +402,32 @@ class _MqttScreenState extends State<MqttScreen> {
                           style: TextStyle(
                               fontSize: 12, fontWeight: FontWeight.w600)),
                       const SizedBox(width: 8),
-                      DropdownButton<String>(
-                        value: _selectedBroker,
-                        isDense: true,
-                        underline: const SizedBox(),
-                        items: const [
-                          DropdownMenuItem(
-                            value: 'broker.hivemq.com',
-                            child: Text('HiveMQ Public (broker.hivemq.com)'),
-                          ),
-                          DropdownMenuItem(
-                            value: 'broker.emqx.io',
-                            child: Text('EMQX Public (broker.emqx.io)'),
-                          ),
-                        ],
-                        onChanged: _status == ConnectionStatus.connected
-                            ? null
-                            : (val) {
-                                if (val != null) {
-                                  setState(() => _selectedBroker = val);
-                                }
-                              },
+                      Expanded(
+                        child: DropdownButton<String>(
+                          value: _selectedBroker,
+                          isDense: true,
+                          isExpanded: true,
+                          underline: const SizedBox(),
+                          items: const [
+                            DropdownMenuItem(
+                              value: 'broker.hivemq.com',
+                              child: Text('HiveMQ (broker.hivemq.com)',
+                                  overflow: TextOverflow.ellipsis),
+                            ),
+                            DropdownMenuItem(
+                              value: 'broker.emqx.io',
+                              child: Text('EMQX (broker.emqx.io)',
+                                  overflow: TextOverflow.ellipsis),
+                            ),
+                          ],
+                          onChanged: _status == ConnectionStatus.connected
+                              ? null
+                              : (val) {
+                                  if (val != null) {
+                                    setState(() => _selectedBroker = val);
+                                  }
+                                },
+                        ),
                       ),
                     ],
                   ),
@@ -492,20 +495,19 @@ class _MqttScreenState extends State<MqttScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Row(
-                        children: [
-                          Icon(Icons.mark_email_read,
-                              color: Colors.purple, size: 18),
-                          SizedBox(width: 8),
-                          Text(
-                            'Monitor Subscriber (Client A)',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 14),
-                          ),
-                        ],
+                      const Icon(Icons.mark_email_read,
+                          color: Colors.purple, size: 18),
+                      const SizedBox(width: 8),
+                      const Expanded(
+                        child: Text(
+                          'Monitor Subscriber (Client A)',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 13),
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
+                      const SizedBox(width: 8),
                       Text(
                         'Total Diterima: $_receivedCount',
                         style: TextStyle(
@@ -634,20 +636,19 @@ class _MqttScreenState extends State<MqttScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Row(
-                        children: [
-                          Icon(Icons.upload,
-                              color: Colors.deepOrange, size: 18),
-                          SizedBox(width: 8),
-                          Text(
-                            'Simulasi Publisher Sensor (Client B)',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 14),
-                          ),
-                        ],
+                      const Icon(Icons.upload,
+                          color: Colors.deepOrange, size: 18),
+                      const SizedBox(width: 8),
+                      const Expanded(
+                        child: Text(
+                          'Simulasi Publisher (Client B)',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 13),
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
+                      const SizedBox(width: 8),
                       Text(
                         'Total Kirim: $_publishedCount',
                         style: const TextStyle(

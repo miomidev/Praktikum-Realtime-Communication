@@ -129,7 +129,7 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
           NavigationDestination(
             icon: Icon(Icons.menu_book_outlined),
             selectedIcon: Icon(Icons.menu_book),
-            label: 'Teori & Tanya Jawab',
+            label: 'Teori & QnA',
           ),
         ],
       ),
